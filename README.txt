@@ -1,9 +1,9 @@
-Try To Do List: Education — PWA package
+Try To Do List: Education — Legal Information Update
 
-This package is based on the v23 full-app restore build. It adds a PWA manifest, Moss home-screen icons, a basic service worker, and an in-app Add to Home Screen control.
+Based on the tested timer-fix and backup/onboarding build. Adds a first-use educational disclaimer acknowledgement and in-app Educational Disclaimer, Terms of Use, and Privacy Policy links.
 
-Upload the CONTENTS of this folder to the root of an HTTPS-hosted site. iPhone users should open the page in Safari, tap Share > Add to Home Screen > Add. Samsung/Android users can use the in-app install prompt in Chrome; otherwise use Chrome menu > Install app / Add to Home screen.
+Upload the CONTENTS of this ZIP to the root of the existing GitHub Pages repository, replacing the matching files. Keep the existing repository and URL. Service-worker cache is bumped to v5.
 
-Moss is the app icon. The in-app control detects supported Android install prompts and provides platform-specific instructions.
+Important: These are plain-language draft notices for a prototype, not legal advice or a certification of compliance. Before public or school-board deployment, have the terms and privacy practices reviewed for applicable Canadian and Ontario requirements, especially because students may be minors. If the app later adds accounts, analytics, cloud sync, or integrations, update the privacy policy before enabling those features.
 
-Local autosave remains browser/device-specific. There is no account or cloud sync. Offline behavior is a first-pass cache and needs device testing. This build has not been live-browser tested; retain your previous deployment until checked.
+Student data remains stored locally in the browser in this version. Acknowledgement is a product-use notice, not parental consent or a substitute for any consent required by law or a school.
