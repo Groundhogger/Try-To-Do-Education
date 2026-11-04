@@ -374,15 +374,16 @@ applyMossStyle();render();recommend();renderHall();
   byId('timerProgress').style.strokeDashoffset=String(circumference*(1-Math.max(0,Math.min(1,progress))));
   if(t.finished){byId('timerStatus').textContent='Time for a break, if you’d like one.';byId('timerStart').textContent='Start again'}
   else if(t.running){byId('timerStatus').textContent=t.mode==='countdown'?'You’re working toward a break.':'You’re studying. Every minute counts.';byId('timerStart').textContent='Running…'}
-  else if(e>0){byId('timerStatus').textContent='Paused — resume whenever you’re ready.';byId('timerStart').textContent='Resume studying'}
+  else if(e>0){byId('timerStatus').textContent='Paused — continue whenever you’re ready.';byId('timerStart').textContent='Continue'}
   else{byId('timerStatus').textContent=t.mode==='countdown'?'Ready for a focused session?':'Ready when you are';byId('timerStart').textContent='Start studying'}
+  byId('timerStart').disabled=t.running;
   byId('timerPause').disabled=!t.running;
  }
  function stopInterval(){if(t.interval){clearInterval(t.interval);t.interval=null}}
  function tick(){if(t.mode==='countdown'&&remaining()<=0){t.elapsedBefore=t.duration;t.running=false;t.finished=true;stopInterval()}draw()}
  function start(){if(t.finished)reset();if(t.running)return;if(t.mode==='countdown')t.duration=Number(byId('breakMinutes').value)*60;t.startedAt=Date.now();t.running=true;stopInterval();t.interval=setInterval(tick,250);draw()}
  function pause(){if(!t.running)return;t.elapsedBefore=elapsed();t.running=false;stopInterval();persistTimer();draw()}
- function reset(){t.running=false;t.elapsedBefore=0;t.startedAt=0;t.finished=false;stopInterval();persistTimer();draw()}
+ function reset(){stopInterval();t.running=false;t.elapsedBefore=0;t.startedAt=0;t.finished=false;if(t.mode==='countdown')t.duration=Number(byId('breakMinutes').value)*60;persistTimer();draw()}
  function setMode(mode){if(t.running)pause();t.mode=mode;document.querySelectorAll('[data-timer-mode]').forEach(b=>{const active=b.dataset.timerMode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});byId('countdownSettings').hidden=mode!=='countdown';reset();persistTimer()}
  document.querySelectorAll('[data-timer-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.timerMode)));
  byId('timerStart').addEventListener('click',()=>{start();persistTimer()});byId('timerPause').addEventListener('click',pause);byId('timerReset').addEventListener('click',reset);
