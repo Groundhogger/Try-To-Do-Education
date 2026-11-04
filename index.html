@@ -204,6 +204,7 @@ function save(){
   $('status').textContent='Could not save in this browser. Export a backup if possible.';
  }
 }
+window.__ttdlPersistTimer=function(timer){state.timer=timer;save();};
 function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Array.isArray(v.assignments)){state={...state,...v,achievements:Array.isArray(v.achievements)?v.achievements:[],mossStyle:v.mossStyle||'balanced'};}}catch(e){state={assignments:[],energy:'Medium',mood:'some'}}}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function dateLabel(d){if(!d)return 'No due date';const date=new Date(d+'T12:00:00');return date.toLocaleDateString(undefined,{month:'short',day:'numeric'})}
@@ -366,7 +367,7 @@ applyMossStyle();render();recommend();renderHall();
  function fmt(n){n=Math.max(0,Math.floor(n));const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;return h?String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'):String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
  function elapsed(){return t.elapsedBefore+(t.running?(Date.now()-t.startedAt)/1000:0)}
  function remaining(){return Math.max(0,t.duration-elapsed())}
- function persistTimer(){state.timer={mode:t.mode,duration:t.duration,elapsedBefore:Math.floor(elapsed())};save()}
+ function persistTimer(){const snapshot={mode:t.mode,duration:t.duration,elapsedBefore:Math.floor(elapsed())};if(typeof window.__ttdlPersistTimer==='function')window.__ttdlPersistTimer(snapshot)}
  function draw(){
   const e=elapsed(), rem=remaining();
   byId('timerTime').textContent=fmt(t.mode==='countdown'?rem:e);
