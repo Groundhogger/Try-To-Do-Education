@@ -7,3 +7,6 @@ Upload the CONTENTS of this ZIP to the root of the existing GitHub Pages reposit
 Important: These are plain-language draft notices for a prototype, not legal advice or a certification of compliance. Before public or school-board deployment, have the terms and privacy practices reviewed for applicable Canadian and Ontario requirements, especially because students may be minors. If the app later adds accounts, analytics, cloud sync, or integrations, update the privacy policy before enabling those features.
 
 Student data remains stored locally in the browser in this version. Acknowledgement is a product-use notice, not parental consent or a substitute for any consent required by law or a school.
+
+
+Version 60: Adds an optional Moss's Sanctuary entry under Moss settings, with a peaceful forest scene and a simple guided breathing experience. Education-specific assignments, study timer, achievements, backups, and student settings are retained. Cache version v6.
